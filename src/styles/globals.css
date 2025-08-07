@@ -40,3 +40,11 @@ a {
     color-scheme: dark;
   }
 }
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
