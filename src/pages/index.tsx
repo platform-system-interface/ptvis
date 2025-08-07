@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { styled } from "styled-components";
 import dynamic from 'next/dynamic';
 
-const Lines = dynamic(() => import('@/components/Lines'), {
+const App = dynamic(() => import('@/App'), {
   ssr: false,
 });
 
@@ -33,7 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
-        <Lines />
+        <App />
       </Main>
     </>
   );
