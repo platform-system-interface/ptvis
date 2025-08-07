@@ -1,8 +1,6 @@
 import { Line } from 'react-konva';
 import { styled } from "styled-components";
-
-const WIDTH = 200;
-const LINE_HEIGHT = 20;
+import { WIDTH, LINE_HEIGHT } from "@/components/consts";
 
 const getSelfRefPoints = (selfPos, i) => [
   [selfPos.x + WIDTH, selfPos.y + LINE_HEIGHT/2 + i * LINE_HEIGHT],
