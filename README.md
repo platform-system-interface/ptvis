@@ -36,7 +36,9 @@ the phyiscal pages becomes efficient and secure. Note that the page table setup
 has implications on managing the page tables themselves, both in terms of
 bookkeeping and updating them during memory allocation and process termination.
 [FreeBSD has an article](https://docs.freebsd.org/en/articles/vm-design/)
-explaining why the design is hard and how theirs evolved over time.
+explaining why the design is hard and how theirs evolved over time. Bear in mind
+that this article is from the year 2000 and some things differ today from what
+is described therein.
 
 There are multiple ways to _define_ page tables, each ISA being a bit different,
 possibly offering different variants (_schemes_), e.g. RISC-V's SV32, SV39, etc.
