@@ -1,40 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# ptvis
 
-## Getting Started
+A web tool to visualize [page tables](https://en.wikipedia.org/wiki/Page_table),
+early draft.
 
-First, run the development server:
+## Basics
+
+Page table basics are commonly [taught in university courses and labs](
+https://pdos.csail.mit.edu/6.1810/2023/labs/pgtbl.html) as well as [strategies
+to handle their size](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-smalltables.pdf)
+and applied in the wider context of [generally managing memory](
+https://cseweb.ucsd.edu/classes/su09/cse120/lectures/Lecture8.pdf).
+
+Students learn what the entries in page tables look like, usually with a given
+architecture to simplify the example, and how a memory management unit (MMU)
+translates a virtual address (VA) into a physical address (PA). When page tables
+are explained, it is common to omit tables not involved in the translation of
+the given VA, i.e., only one table per level is drawn, since otherwise there is
+not enough space. However, that may limit the understanding somewhat.
+
+## Goal
+
+The goal of this tool is to help understand the tables themselves and quickly
+look at different architectures. The exact how is not clear at this point.
+Unlike a sketch on a chalkboard, a digital approach allows for having more
+context nevertheless, since the virtual canvas we draw on is infinite and we can
+hide and show parts as we please, offering toggles and many other controls.
+
+We do not want to get down do the detail of addressing a single byte, since that
+is commonly a simple offset once a physical page is found and too much to show.
+
+## Background
+
+Page tables are tricky to organize in a way such that constructing VAs and using
+the phyiscal pages becomes efficient and secure. Note that the page table setup
+has implications on managing the page tables themselves, both in terms of
+bookkeeping and updating them during memory allocation and process termination.
+[FreeBSD has an article](https://docs.freebsd.org/en/articles/vm-design/)
+explaining why the design is hard and how theirs evolved over time.
+
+There are multiple ways to _define_ page tables, each ISA being a bit different,
+possibly offering different variants (_schemes_), e.g. RISC-V's SV32, SV39, etc.
+
+At the same time, there are different ways to _use_ page tables.
+For example, the [Hypatia hypervisor proposes _recursive page tables_](
+https://github.com/hypatia-hypervisor/hypatia/blob/main/docs/hdp/0015).
+Linux documents its specific setups per architecture, such as [on RISC-V](
+https://www.kernel.org/doc/html/v6.6/riscv/vm-layout.html) and [on x86](
+https://www.kernel.org/doc/html/v6.6/arch/x86/x86_64/mm.html).
+
+Finally, there are multiple ways to look at and thus _visualize_ page tables.
+
+Here are some other projects looking at different aspects:
+
+- <http://publications.alex-ionescu.com/BlackHat/BlackHat%202013%20-%20Visualizing%20Page%20Tables%20for%20Hacking%20Like%20in%20the%20Movies.pdf>
+    - Presentation: <https://media.blackhat.com/us-13/US-13-Wicherski-Hacking-like-in-the-Movies-Visualizing-Page-Tables-WP.pdf>
+    - Based on <https://binvis.io/> / <https://corte.si/posts/visualisation/binvis/>
+    - Security view on how pages are marked RWX etc
+
+## Development
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with
+[`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
+To run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Here is a first example screenshot:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+![](docs/screenshot.png)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Refer to the [Next.js documentation](https://nextjs.org/docs) for more.
