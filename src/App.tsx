@@ -13,7 +13,7 @@ type PT = {
   ptes: PTE[];
 }
 
-const tables: PT = [
+const tables: PT[] = [
   { pn: 1, pos: { x: 40, y: 40 },   ptes: [{ pn: 1, x: true }, { pn: 2, r: true }] },
   { pn: 2, pos: { x: 440, y: 170 }, ptes: [{ pn: 2, x: true }, { pn: 3, r: true }, { pn: 4, r: true }] },
   { pn: 3, pos: { x: 840, y: 100 }, ptes: [{ pn: 3, x: true }, { pn: 0, r: true }] },
@@ -21,9 +21,9 @@ const tables: PT = [
 ];
 
 const selfRefs = tables.map(
-  ({ pn, pos, ptes }) => ptes.map((pte, i) => ({ ...pte, pos, i })).filter(
+  ({ pn, pos, ptes }) => ptes.map((pte, i) => ({ ...pte, i })).filter(
     (pte) => pte.pn === pn
-  ).map(({ pos, i }) => ({ pos, i }))
+  ).map(({ i }) => ({ pos, i }))
 ).flat();
 
 const nextRefs = tables.map(
