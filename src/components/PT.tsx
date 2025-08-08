@@ -14,14 +14,17 @@ export type Point = {
   y: number;
 };
 
-const Table = styled.table<{ position: Point }>`
+const Pos = styled.div<{ position: Point }>`
   position: absolute;
   top: ${({ position }) => position.y}px;
   left: ${({ position }) => position.x}px;
-  border-spacing: 0;
-  background: #111;
   outline: 1px dotted #700;
   outline-offset: 5px;
+`;
+
+const Table = styled.table`
+  border-spacing: 0;
+  background: #111;
 `;
 
 const BORDER = "1px solid #080";
@@ -78,21 +81,23 @@ type Props = {
 };
 
 const PT: Component<Props> = ({ tn, entries, position }) => (
-  <Table position={position}>
-    <TB>
-      {entries.map((e, i) => (
-        <TR key={i}>
-          <TD>{e.pn}</TD>
-          <TD>
-            <BoolBox on={e.r}>R</BoolBox>
-            <BoolBox on={e.w}>W</BoolBox>
-            <BoolBox on={e.x}>X</BoolBox>
-          </TD>
-        </TR>
-      ))}
-    </TB>
+  <Pos position={position}>
+    <Table>
+      <TB>
+        {entries.map((e, i) => (
+          <TR key={i}>
+            <TD>{e.pn}</TD>
+            <TD>
+              <BoolBox on={e.r}>R</BoolBox>
+              <BoolBox on={e.w}>W</BoolBox>
+              <BoolBox on={e.x}>X</BoolBox>
+            </TD>
+          </TR>
+        ))}
+      </TB>
+    </Table>
     <TN>table #{tn}</TN>
-  </Table>
+  </Pos>
 );
 
 export default PT;
