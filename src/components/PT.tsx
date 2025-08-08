@@ -4,8 +4,9 @@ import { WIDTH, LINE_HEIGHT } from "@/components/consts";
 
 export type PTE = {
   pn: number;
-  r: boolean;
-  x: boolean;
+  r?: boolean;
+  w?: boolean;
+  x?: boolean;
 };
 
 export type Point = {
@@ -13,11 +14,30 @@ export type Point = {
   y: number;
 };
 
+const Table = styled.table<{ position: Point }>`
+  position: absolute;
+  top: ${({ position }) => position.y}px;
+  left: ${({ position }) => position.x}px;
+  border-spacing: 0;
+  background: #111;
+  outline: 1px dotted #700;
+  outline-offset: 5px;
+`;
+
+const BORDER = "1px solid #080";
+
+const TB = styled.tbody`
+  border-bottom: ${BORDER};
+  border-spacing: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
 const TR = styled.tr`
   width: ${WIDTH}px;
   height: ${LINE_HEIGHT}px;
   margin: 0px;
-  border: 1px solid #0f0;
+  border: ${BORDER};
   border-bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -33,14 +53,6 @@ const TD = styled.td`
   align-items: center;
 `;
 
-const Table = styled.table<{ position: Point }>`
-  position: absolute;
-  top: ${({ position }) => position.y}px;
-  left: ${({ position }) => position.x}px;
-  border-bottom: 1px solid #0f0;
-  border-spacing: 0;
-`;
-
 const BoolBox = styled.div<{ on: boolean }>`
   width: 16px;
   height: 16px;
@@ -52,11 +64,18 @@ const BoolBox = styled.div<{ on: boolean }>`
   ${({ on }) => on ? `background: #fff;` : ""}
 `;
 
-const TB = styled.tbody`
-  border-spacing: 0;
+const TN = styled.div`
+  padding: 2px 4px;
+  font-size: 12px;
 `;
 
-const PT: Component<{ entries: PTE[], position: Point }> = ({ entries, position }) => (
+type Props = {
+  tn: number;
+  entries: PTE[];
+  position: Point;
+};
+
+const PT: Component<Props> = ({ tn, entries, position }) => (
   <Table position={position}>
     <TB>
       {entries.map((e, i) => (
@@ -64,11 +83,13 @@ const PT: Component<{ entries: PTE[], position: Point }> = ({ entries, position 
           <TD>{e.pn}</TD>
           <TD>
             <BoolBox on={e.r}>R</BoolBox>
+            <BoolBox on={e.w}>W</BoolBox>
             <BoolBox on={e.x}>X</BoolBox>
           </TD>
         </TR>
       ))}
-  </TB>
+    </TB>
+    <TN>table #{tn}</TN>
   </Table>
 );
 

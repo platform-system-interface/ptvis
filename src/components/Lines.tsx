@@ -15,7 +15,7 @@ export const SelfRefLine = ({ selfPos, i }) => (
   <Line {...{
     points: getSelfRefPoints(selfPos, i),
     stroke: 'green',
-    strokeWidth: 2,
+    strokeWidth: 1,
     lineJoin: 'round',
     dash: [8, 2]
   }} />
@@ -31,7 +31,7 @@ const getNextRefPoints = (selfPos, nextPos, i) => [
 export const NextRefLine = ({ selfPos, nextPos, i }) => (
   <Line {...{
     points: getNextRefPoints(selfPos, nextPos, i),
-    stroke: 'blue',
+    stroke: '#00d',
     strokeWidth: 2,
     lineJoin: 'round',
     dash: [8, 2]
