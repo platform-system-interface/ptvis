@@ -48,7 +48,7 @@ const TD = styled.td`
   height: 100%;
   margin: 0px;
   padding: 2px;
-  font-size: 10px;
+  font-size: 12px;
   display: flex;
   align-items: center;
 `;
@@ -59,8 +59,10 @@ const BoolBox = styled.div<{ on: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #888;
+  font-size: 11px;
+  font-weight: bold;
   border: 1px solid #fff;
+  color: ${({ on }) => on ? "#222" : "#ddd"};
   ${({ on }) => on ? `background: #fff;` : ""}
 `;
 
