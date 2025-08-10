@@ -18,8 +18,11 @@ const Pos = styled.div<{ position: Point }>`
   position: absolute;
   top: ${({ position }) => position.y}px;
   left: ${({ position }) => position.x}px;
-  outline: 1px dotted #700;
+  z-index: 100;
   outline-offset: 5px;
+  &:hover {
+    outline: 1px dotted #700;
+  }
 `;
 
 const Table = styled.table`
@@ -56,7 +59,7 @@ const TD = styled.td`
   align-items: center;
 `;
 
-const BoolBox = styled.div<{ on: boolean }>`
+const BoolBox = styled.button<{ on: boolean }>`
   width: 16px;
   height: 16px;
   display: flex;
@@ -66,7 +69,7 @@ const BoolBox = styled.div<{ on: boolean }>`
   font-weight: bold;
   border: 1px solid #fff;
   color: ${({ on }) => on ? "#222" : "#ddd"};
-  ${({ on }) => on ? `background: #fff;` : ""}
+  background: ${({ on }) => on ? "#fff" : "#000"};
 `;
 
 const TN = styled.div`
@@ -88,9 +91,14 @@ const PT: Component<Props> = ({ tn, entries, position }) => (
           <TR key={i}>
             <TD>{e.pn}</TD>
             <TD>
-              <BoolBox on={e.r}>R</BoolBox>
-              <BoolBox on={e.w}>W</BoolBox>
+              <BoolBox on={e.d}>D</BoolBox>
+              <BoolBox on={e.a}>A</BoolBox>
+              <BoolBox on={e.g}>G</BoolBox>
+              <BoolBox on={e.u}>U</BoolBox>
               <BoolBox on={e.x}>X</BoolBox>
+              <BoolBox on={e.w}>W</BoolBox>
+              <BoolBox on={e.r}>R</BoolBox>
+              <BoolBox on={e.v}>V</BoolBox>
             </TD>
           </TR>
         ))}

@@ -2,6 +2,7 @@ import { Stage, Layer } from 'react-konva';
 import { styled } from "styled-components";
 import PT, { Point, PTE } from "@/components/PT";
 import { NextRefLine, SelfRefLine } from "@/components/Lines";
+import { WIDTH } from "@/components/consts";
 
 const C = styled.div`
   position: relative;
@@ -13,12 +14,30 @@ type PT = {
   ptes: PTE[];
 }
 
+const OFFSET = 30;
+const GAP = 80;
+
 const tables: PT[] = [
-  { tn: 1, pos: { x: 40, y: 40 },   ptes: [{ pn: 1, x: true }, { pn: 2, r: true }, { pn: 5, r: true }] },
-  { tn: 2, pos: { x: 480, y: 170 }, ptes: [{ pn: 2, x: true }, { pn: 3, r: true }, { pn: 4, r: true }] },
-  { tn: 3, pos: { x: 840, y: 100 }, ptes: [{ pn: 3, x: true }, { pn: 0, w: true }] },
-  { tn: 4, pos: { x: 840, y: 300 }, ptes: [{ pn: 4, x: true }, { pn: 0, r: true }, { pn: 0, r: true, w: true }] },
-  { tn: 5, pos: { x: 440, y: 320 }, ptes: [{ pn: 5, x: true }, { pn: 4, r: true }, { pn: 0, r: true }, { pn: 0, r: true }] },
+  {
+    tn: 1, pos: { x: OFFSET + 0 * (WIDTH + GAP), y: 40 },
+    ptes: [{ pn: 1, v: true }, { pn: 2, v: true }, { pn: 5, v: true }, { pn: 4, v: true }],
+  },
+  {
+    tn: 2, pos: { x: OFFSET + 1 * (WIDTH + GAP), y: 170 },
+    ptes: [{ pn: 2, v: true }, { pn: 3, v: true }, { pn: 4, v: true }],
+  },
+  {
+    tn: 3, pos: { x: OFFSET + 2 * (WIDTH + GAP), y: 100 },
+    ptes: [{ pn: 3, v: true }, { pn: 0, w: true }],
+  },
+  {
+    tn: 4, pos: { x: OFFSET + 2 * (WIDTH + GAP), y: 300 },
+    ptes: [{ pn: 4, v: true }, { pn: 0, r: true }, { pn: 0, r: true, w: true }],
+  },
+  {
+    tn: 5, pos: { x: OFFSET + 1 * (WIDTH + GAP), y: 360 },
+    ptes: [{ pn: 5, v: true }, { pn: 4, v: true }, { pn: 0, v: true }, { pn: 0, x: true }],
+  },
 ];
 
 const selfRefs = tables.map(
